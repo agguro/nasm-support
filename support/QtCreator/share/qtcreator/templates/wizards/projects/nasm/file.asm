@@ -5,17 +5,28 @@
 
 bits 64
 
-%include "%{FileName}.inc"
+%include "../%{FileName}/%{FileName}.inc"
 
-global _start
+global main
 
 section .bss
+;uninitialized read-write data 
 
 section .data
+;initialized read-write data
+
+section .rodata
+;read-only data
 
 section .text
 
-_start:
+main:
+    push    rbp
+    mov     rbp,rsp
 
+    ;TODO: put your code here...
 
-    syscall exit,0
+    xor     rax,rax             ;return error code
+    mov     rsp,rbp
+    pop     rbp
+    ret                         ;exit is handled by compiler

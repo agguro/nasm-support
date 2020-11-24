@@ -3,7 +3,7 @@
     "supportedProjectTypes": [ "CMakeProjectManager.CMakeProject", "Qbs.QbsProject", "Qt4ProjectManager.Qt4Project" ],
     "id": "A.Nasm 64 bits Application",
     "category": "I.Projects",
-    "trDescription": "Creates a Nasm 64 bits application with no dependencies.",
+    "trDescription": "Creates Nasm 64 bits application (qmake only) with no dependencies.",
     "trDisplayName": "Nasm 64 bits Application",
     "trDisplayCategory": "Non-Qt Project",
     "icon": "nasm.png",
@@ -85,11 +85,6 @@
                 {
                     "source": "file.inc",
                     "target": "%{FileName}.inc",
-                    "openInEditor": true
-                },
-		{
-                    "source": "Makefile",
-                    "target": "Makefile",
                     "openInEditor": true
                 },
                 {
