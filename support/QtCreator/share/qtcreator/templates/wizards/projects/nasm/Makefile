@@ -20,12 +20,12 @@ $(NAME)$(O): $(NAME)$(ASM)
 	nasm $(ASFLAGS) $(NAME)$(ASM) -o $(NAME)$(O)
 
 release:
-	make clean
-	make $(NAME)
+	$(MAKE) clean
+	$(MAKE) $(NAME)
 
 debug:
-	make clean
-	make $(NAME) ASFLAGS="-felf64 -Fdwarf -g -l $(NAME)$(LST)" LDFLAGS="-g -melf_x86_64"
+	$(MAKE) clean
+	$(MAKE) $(NAME) ASFLAGS="-felf64 -Fdwarf -g -l $(NAME)$(LST)" LDFLAGS="-g -melf_x86_64"
 
 clean:
 	@rm -f $(NAME) $(NAME)$(LST) $(NAME)$(O)
