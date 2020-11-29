@@ -1,26 +1,27 @@
-%ifdef      MACOS
-%define     ENTRYPOINT      _main
-%define     SYSCALL_WRITE   0x2000004
-%define     SYSCALL_EXIT    0x2000001
-%else
-%define     ENTRYPOINT      start
-%define     SYSCALL_WRITE   1
-%define     SYSCALL_EXIT    60
-%endif
+;name: hello.asm
+;
+;description: example of a build with cmake and nasm
+;
+;build:
+;    in the project root directory
+;    cmake .
+;    make
 
-            section         .text
-            global          ENTRYPOINT
+global  _start
 
-ENTRYPOINT: mov             rax, SYSCALL_WRITE  ; write
-            mov             rdi, 1              ; stdout
-            mov             rsi, msg
-            mov             rdx, msg.len
-            syscall
-            mov             rax, SYSCALL_EXIT   ; exit
-            mov             rdi, 0              ; return 0
-            syscall
+section .data
+msg     db      'Hello world', 0x0A
+.len    equ     $ - msg
 
-            section         .data
+section .text
 
-msg         db              'Hello world', 0x0A ; 'Hello world' followed by newline
-.len        equ             $ - msg
+_start:
+    xor     rax,rax
+    inc     rax             ;syscall for write
+    mov     rdi,rax         ;stdout also 1
+    mov     rsi,msg         ;address of the message
+    mov     rdx,msg.len     ;length of the message
+    syscall
+    mov     rax,60          ;syscall for exit
+    xor     rdi,rdi         ;return 0
+    syscall
